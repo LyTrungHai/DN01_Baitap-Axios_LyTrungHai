@@ -1,42 +1,41 @@
 // info: Thông tin
 // data: dữ liệu
 
-function SanPhamServices() {
+function ListUser() {
   this.layDS = function () {
     return axios({
       method: "get",
-      url: "https://6131b9c77287b70017e641fd.mockapi.io/Product2",
+      url: "https://613ebe6ee9d92a0017e17275.mockapi.io/UsersManagement",
     });
   };
 
-  this.them = function (sp) {
+  this.them = function (nd) {
     return axios({
       method: "post",
-      url: "https://6131b9c77287b70017e641fd.mockapi.io/Product2",
-      data: sp,
+      url: "https://613ebe6ee9d92a0017e17275.mockapi.io/UsersManagement",
+      data: nd,
     });
   };
 
-  this.laySP = function (id) {
+  this.layND = function (id) {
     return axios({
       method: "get",
-      url: `https://6131b9c77287b70017e641fd.mockapi.io/Product2/${id}`,
+      url: `https://613ebe6ee9d92a0017e17275.mockapi.io/UsersManagement/${id}`,
     });
   };
 
-  this.capNhatSP = function (sp, id) {
+  this.capNhatND = function (nd, id) {
     return axios({
       method: "put",
-      url: `https://6131b9c77287b70017e641fd.mockapi.io/Product2/${id}`,
-      data: sp,
+      url: `https://613ebe6ee9d92a0017e17275.mockapi.io/UsersManagement/${id}`,
+      data: nd,
     });
   };
 
-  this.xoaSP = function (id) {
+  this.xoaND = function (id) {
     return axios({
       method: "delete",
-      url: `https://6131b9c77287b70017e641fd.mockapi.io/Product2/${id}`,
-      data: sp,
+      url: `https://613ebe6ee9d92a0017e17275.mockapi.io/UsersManagement/${id}`,
     });
   };
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quản lý sản phẩm</title>
+    <title>Quản lý người dùng</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -15,6 +15,9 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+
+    <!-- CSS  -->
+    <link rel="stylesheet" href="../../assets/css/main.css" />
   </head>
 
   <body>
@@ -68,7 +71,7 @@
             href="#DanhSachSP"
             role="tab"
             data-toggle="tab"
-            >Danh sách sản phẩm</a
+            >Danh sách người dùng</a
           >
         </li>
       </ul>
@@ -81,7 +84,8 @@
             <div class="col-md-8">
               <!-- BEGIN BUTTOM THÊM MỚI -->
               <button
-                id="btnThemSP"
+                onclick="resetForm()"
+                id="btnThemND"
                 class="btn btn-success"
                 data-toggle="modal"
                 data-target="#myModal"
@@ -116,11 +120,12 @@
             <table class="table table-bordered">
               <thead>
                 <th>STT</th>
+                <th>Tài Khoản</th>
                 <th>Tên Người Dùng</th>
                 <th>Email Người Dùng</th>
                 <th>Loại Người Dùng</th>
-                <th>Hình Ảnh</th>
                 <th>Ngôn Ngữ</th>
+                <th>Action</th>
               </thead>
               <tbody id="tblDanhSachNguoiDung"></tbody>
             </table>
@@ -146,83 +151,90 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-              <div class="form-group">
-                <label>Tài khoản</label>
-                <input
-                  id="TaiKhoan"
-                  class="form-control"
-                  placeholder="Nhập tài khoản người dùng"
-                />
-              </div>
-              <div class="form-group">
-                <label>Họ tên</label>
-                <input
-                  id="HoVaTen"
-                  class="form-control"
-                  placeholder="Nhập họ và tên"
-                />
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="Email"
-                  placeholder="vd: trunghai1610@gmail.com"
-                />
-              </div>
-              <div class="form-group">
-                <label>Mật khẩu</label>
-                <input
-                  id="PassWord"
-                  class="form-control"
-                  type="password"
-                  placeholder="có ít nhất 1 ký tự hoa, 1 ký tự đặc biệt, 1 ký tự 
+              <form id="mainForm">
+                <div class="form-group">
+                  <label>Tài khoản</label>
+                  <input
+                    id="TaiKhoan"
+                    class="form-control"
+                    placeholder="Nhập tài khoản người dùng"
+                  />
+                  <small class="text-danger" id="tbTK"></small>
+                </div>
+                <div class="form-group">
+                  <label>Họ tên</label>
+                  <input
+                    id="HoVaTen"
+                    class="form-control"
+                    placeholder="Nhập họ và tên"
+                  />
+                  <small class="text-danger" id="tbTen"></small>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="Email"
+                    placeholder="vd: trunghai1610@gmail.com"
+                  />
+                  <small class="text-danger" id="tbEmail"></small>
+                </div>
+                <div class="form-group">
+                  <label>Mật khẩu</label>
+                  <input
+                    id="PassWord"
+                    class="form-control"
+                    type="password"
+                    placeholder="có ít nhất 1 ký tự hoa, 1 ký tự đặc biệt, 1 ký tự 
   số, độ dài 6-8"
-                />
-              </div>
-              <div class="form-group">
-                <label>Hình Ảnh</label>
-                <input
-                  id="HinhAnh"
-                  class="form-control"
-                  placeholder="Nhập vào hình ảnh"
-                />
-                <span id="spanHinhAnh" class="text-danger"></span>
-              </div>
-              <div class="form-group">
-                <label for="">Loại người dùng: </label>
-                <select class="form-control" id="loaiNguoiDung">
-                  <option>Chọn loại người dùng</option>
-                  <option value="GV">Giáo viên</option>
-                  <option value="HV">Học viên</option>
-                </select>
-                <span id="spanNguoiDung" class="text-danger"></span>
-              </div>
-              <div class="form-group">
-                <label for="">Loại ngôn ngữ: </label>
-                <select class="form-control" id="loaiNgonNgu">
-                  <option>Chọn loại ngôn ngữ</option>
-                  <option>ITALIAN</option>
-                  <option>FRENCH</option>
-                  <option>ENGLISH</option>
-                  <option>CHINESE</option>
-                  <option>KOREAN</option>
-                  <option>JAPANESE</option>
-                  <option>RUSSIAN</option>
-                </select>
-                <span id="spanNguoiDung" class="text-danger"></span>
-              </div>
-              <div class="form-group">
-                <label>Mô tả</label>
-                <textarea
-                  name=""
-                  id="MoTa"
-                  class="form-control"
-                  placeholder="Nhập vào mô tả"
-                ></textarea>
-                <span id="spanMoTa" class="text-danger"></span>
-              </div>
+                  />
+                  <small class="text-danger" id="tbMK"></small>
+                </div>
+                <div class="form-group">
+                  <label>Hình Ảnh</label>
+                  <input
+                    id="HinhAnh"
+                    class="form-control"
+                    placeholder="Nhập vào hình ảnh"
+                  />
+                  <small class="text-danger" id="tbHinhAnh"></small>
+                </div>
+                <div class="form-group">
+                  <label for="">Loại người dùng: </label>
+                  <select class="form-control" id="loaiNguoiDung">
+                    <option>Chọn loại người dùng</option>
+                    <option value="GV">Giáo viên</option>
+                    <option value="HV">Học viên</option>
+                  </select>
+                  <small class="text-danger" id="tbLoaiNguoiDung"></small>
+                </div>
+                <div class="form-group">
+                  <label for="">Loại ngôn ngữ: </label>
+                  <select class="form-control" id="loaiNgonNgu">
+                    <option>Chọn loại ngôn ngữ</option>
+                    <option>ITALIAN</option>
+                    <option>FRENCH</option>
+                    <option>ENGLISH</option>
+                    <option>CHINESE</option>
+                    <option>KOREAN</option>
+                    <option>JAPANESE</option>
+                    <option>RUSSIAN</option>
+                  </select>
+                  <small class="text-danger" id="tbLoaiNgonNgu"></small>
+                </div>
+                <div class="form-group">
+                  <label>Mô tả</label>
+                  <textarea
+                    name=""
+                    id="MoTa"
+                    class="form-control"
+                    placeholder="Nhập vào mô tả"
+                    maxlength="60"
+                  ></textarea>
+                  <small class="text-danger" id="tbMoTa"></small>
+                </div>
+              </form>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer"></div>
